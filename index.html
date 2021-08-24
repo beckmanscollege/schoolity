@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<style>
+			body {
+				font-family: arial, sans-serif;
+				font-size: 18px;
+			}
+			fieldset div div {
+				/* display: grid; */
+				/* grid-template-columns: 1fr 1fr; */
+			}
+			label {
+				display: inline-block;
+				width: 30%;
+			}
+			label + * {
+				display: inline-block;
+				width: 60% !important;
+			}
+			textarea {
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<style id="style"></style>
+		<fieldset>
+			<legend>Schoolity Input</legend>
+			<div>
+				<h3>Tid</h3>
+				<div>
+					<p>
+						<label for="time-start">Start</label>
+						<input type="time" id="time-start" value="09:00" />
+					</p>
+					<p>
+						<label for="time-end">Slut</label>
+						<input type="time" id="time-end" value="10:00" />
+					</p>
+				</div>
+			</div>
+			<div>
+				<h3>Info</h3>
+				<p>
+					<label for="location">Plats</label>
+					<select id="location">
+						<option value="aula">Aula</option>
+					</select>
+				</p>
+				<p>
+					<label for="lecturer">Lärare</label>
+					<input id="lecturer" value="Jonas Johansson" />
+				</p>
+				<p>
+					<label for="heading">Rubrik</label>
+					<input id="heading" value="The Art of the Deal" />
+				</p>
+				<p>
+					<label for="body">Innehåll</label>
+					<textarea id="body">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim diam, nec vulputate diam elementum id. Pellentesque rutrum id augue sed commodo. Curabitur luctus gravida dui, in finibus tortor semper vulputate. Aliquam mi nibh, sagittis vitae luctus et, suscipit non neque. Nulla vitae lorem elit. Curabitur suscipit ultrices mi, a pharetra purus vulputate a. Donec sed ligula a lectus consequat blandit. Maecenas imperdiet lacus ac sem malesuada, eu imperdiet ex vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus quis cursus odio.</textarea
+					>
+				</p>
+			</div>
+			<div>
+				<h3>Stil</h3>
+				<p>
+					<label for="color">Färg</label>
+					<input type="color" id="color" value="#000000" />
+				</p>
+				<p>
+					<label for="background-color">Bakgrundsfärg</label>
+					<input type="color" id="background-color" value="#ffffff" />
+				</p>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Schoolity Output</legend>
+			<div>
+				<!-- <h3></h3> -->
+				<div contenteditable="true" id="output"></div>
+			</div>
+		</fieldset>
+		<script>
+			const els = document.querySelectorAll('input, select');
+			const out = document.querySelector('#output');
+			for (let el of els) {
+				el.addEventListener('input', function () {
+					const timeStart = document.querySelector('#time-start').value;
+					const timeEnd = document.querySelector('#time-end').value;
+					const location = document
+						.querySelector('#location')
+						.value.toUpperCase();
+					let lecturer = document.querySelector('#lecturer').value;
+					if (lecturer.length > 0) lecturer = ' (' + lecturer + ')';
+					const heading = document.querySelector('#heading').value;
+					const body = document.querySelector('#body').value;
+					const style = document.querySelector('#style');
+					const color = document.querySelector('#color').value;
+					const backgroundColor =
+						document.querySelector('#background-color').value;
+					out.innerHTML = `<span>${timeStart}-${timeEnd}</span><br><span>${heading}${lecturer}</span><br><br><span>${body}</span><br><br><span><strong>${location}</strong></span></div>`;
+					style.innerHTML = `span { color: ${color}; background-color: ${backgroundColor};`;
+				});
+				let event = new Event('input', {
+					bubbles: true,
+					cancelable: true,
+				});
+				el.dispatchEvent(event);
+			}
+		</script>
+	</body>
+</html>
