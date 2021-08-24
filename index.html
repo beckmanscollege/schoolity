@@ -3,20 +3,23 @@
 		<style>
 			body {
 				font-family: arial, sans-serif;
-				font-size: 18px;
+				font-size: 16px;
 			}
-			fieldset div div {
-				/* display: grid; */
-				/* grid-template-columns: 1fr 1fr; */
+			fieldset {
+				width: 49%;
+				box-sizing: border-box;
+			}
+			fieldset:first-of-type {
+				float: left;
+			}
+			fieldset:last-of-type {
+				float: right;
 			}
 			label {
 				display: inline-block;
 				width: 30%;
 			}
-			label + * {
-				display: inline-block;
-				width: 60% !important;
-			}
+			label + *,
 			textarea {
 				width: 100%;
 			}
@@ -24,8 +27,9 @@
 	</head>
 	<body>
 		<style id="style"></style>
+		<h1>Schoolity</h1>
 		<fieldset>
-			<legend>Schoolity Input</legend>
+			<legend>Input</legend>
 			<div>
 				<h3>Tid</h3>
 				<div>
@@ -45,6 +49,10 @@
 					<label for="location">Plats</label>
 					<select id="location">
 						<option value="aula">Aula</option>
+						<option value="vk-gata">VK Gata</option>
+						<option value="vk-gard">VK Gård</option>
+						<option value="anders">Anders</option>
+						<option value="gota">Göta</option>
 					</select>
 				</p>
 				<p>
@@ -57,7 +65,7 @@
 				</p>
 				<p>
 					<label for="body">Innehåll</label>
-					<textarea id="body">
+					<textarea id="body" rows="10">
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim diam, nec vulputate diam elementum id. Pellentesque rutrum id augue sed commodo. Curabitur luctus gravida dui, in finibus tortor semper vulputate. Aliquam mi nibh, sagittis vitae luctus et, suscipit non neque. Nulla vitae lorem elit. Curabitur suscipit ultrices mi, a pharetra purus vulputate a. Donec sed ligula a lectus consequat blandit. Maecenas imperdiet lacus ac sem malesuada, eu imperdiet ex vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus quis cursus odio.</textarea
 					>
 				</p>
@@ -75,7 +83,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 			</div>
 		</fieldset>
 		<fieldset>
-			<legend>Schoolity Output</legend>
+			<legend>Output</legend>
 			<div>
 				<!-- <h3></h3> -->
 				<div contenteditable="true" id="output"></div>
@@ -90,7 +98,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					const timeEnd = document.querySelector('#time-end').value;
 					const location = document
 						.querySelector('#location')
-						.value.toUpperCase();
+						.options[
+							document.querySelector('#location').selectedIndex
+						].textContent.toUpperCase();
+
 					let lecturer = document.querySelector('#lecturer').value;
 					if (lecturer.length > 0) lecturer = ' (' + lecturer + ')';
 					const heading = document.querySelector('#heading').value;
