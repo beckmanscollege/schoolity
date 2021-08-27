@@ -3,7 +3,7 @@
 		<style>
 			body {
 				font-family: arial, sans-serif;
-				font-size: 16px;
+				font-size: 13px;
 			}
 			fieldset {
 				width: 49%;
@@ -76,10 +76,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					<label for="color">Färg</label>
 					<input type="color" id="color" value="#000000" />
 				</p>
-				<p>
+				<!-- <p>
 					<label for="background-color">Bakgrundsfärg</label>
 					<input type="color" id="background-color" value="#ffffff" />
-				</p>
+				</p> -->
 			</div>
 		</fieldset>
 		<fieldset>
@@ -94,8 +94,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 			const out = document.querySelector('#output');
 			for (let el of els) {
 				el.addEventListener('input', function () {
-					const timeStart = document.querySelector('#time-start').value;
-					const timeEnd = document.querySelector('#time-end').value;
+					const timeStart = document
+						.querySelector('#time-start')
+						.value.replaceAll(':', '.');
+					const timeEnd = document
+						.querySelector('#time-end')
+						.value.replaceAll(':', '.');
 					const location = document
 						.querySelector('#location')
 						.options[
@@ -103,14 +107,22 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 						].textContent.toUpperCase();
 
 					let lecturer = document.querySelector('#lecturer').value;
-					if (lecturer.length > 0) lecturer = ' (' + lecturer + ')';
+					// if (lecturer.length > 0) lecturer = ' (' + lecturer + ')';
 					const heading = document.querySelector('#heading').value;
 					const body = document.querySelector('#body').value;
 					const style = document.querySelector('#style');
 					const color = document.querySelector('#color').value;
-					const backgroundColor =
-						document.querySelector('#background-color').value;
-					out.innerHTML = `<span>${timeStart}-${timeEnd}</span><br><span>${heading}${lecturer}</span><br><br><span>${body}</span><br><br><span><strong>${location}</strong></span></div>`;
+					// const backgroundColor =
+					// 	document.querySelector('#background-color').value;
+					out.innerHTML = `<span><strong>Tid:</strong></span><br><span>${timeStart}-${timeEnd}</span>`;
+					out.innerHTML += '<br><br>';
+					out.innerHTML += `<span><strong>Titel:</strong></span>`;
+					out.innerHTML += '<br>';
+					out.innerHTML += `<span>${heading} med ${lecturer}</span><br><br><span>${body}</span>`;
+					out.innerHTML += '<br><br>';
+					out.innerHTML += `<span><strong>Plats:</strong></span>`;
+					out.innerHTML += '<br>';
+					out.innerHTML += `<span>${location}</span>`;
 					style.innerHTML = `span { color: ${color}; background-color: ${backgroundColor};`;
 				});
 				let event = new Event('input', {
