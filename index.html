@@ -65,8 +65,8 @@
 					<input id="heading" value="The Art of the Deal" />
 				</p>
 				<p>
-					<label for="body">Innehåll</label>
-					<textarea id="body" rows="10">
+					<label for="input">Innehåll</label>
+					<textarea id="input" rows="10">
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim diam, nec vulputate diam elementum id. Pellentesque rutrum id augue sed commodo. Curabitur luctus gravida dui, in finibus tortor semper vulputate. Aliquam mi nibh, sagittis vitae luctus et, suscipit non neque. Nulla vitae lorem elit. Curabitur suscipit ultrices mi, a pharetra purus vulputate a. Donec sed ligula a lectus consequat blandit. Maecenas imperdiet lacus ac sem malesuada, eu imperdiet ex vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus quis cursus odio.</textarea
 					>
 				</p>
@@ -87,7 +87,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 			</div>
 		</fieldset>
 		<script>
-			const els = document.querySelectorAll('input, select');
+			const els = document.querySelectorAll('input, select, textarea');
 			const out = document.querySelector('#output');
 			for (let el of els) {
 				el.addEventListener('input', function () {
@@ -105,14 +105,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 
 					let lecturer = document.querySelector('#lecturer').value;
 					const heading = document.querySelector('#heading').value;
-					const body = document.querySelector('#body').textContent;
+					const input = document.querySelector('#input').value;
 					const style = document.querySelector('#style');
 					const color = document.querySelector('#color').value;
 					out.innerHTML = `<span><strong>Tid:</strong></span><br><span>${timeStart}-${timeEnd}</span>`;
 					out.innerHTML += '<br><br>';
 					out.innerHTML += `<span><strong>Titel:</strong></span>`;
 					out.innerHTML += '<br>';
-					out.innerHTML += `<span>${heading} med ${lecturer}</span><br><br><span>${body}</span>`;
+					out.innerHTML += `<span>${heading} med ${lecturer}</span><br><br><span>${input}</span>`;
 					out.innerHTML += '<br><br>';
 					out.innerHTML += `<span><strong>Plats:</strong></span>`;
 					out.innerHTML += '<br>';
