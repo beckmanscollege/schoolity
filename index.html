@@ -77,10 +77,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					<label for="color">Färg</label>
 					<input type="color" id="color" value="#000000" />
 				</p>
-				<!-- <p>
-					<label for="background-color">Bakgrundsfärg</label>
-					<input type="color" id="background-color" value="#ffffff" />
-				</p> -->
 			</div>
 		</fieldset>
 		<fieldset>
@@ -108,13 +104,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 						].textContent.toUpperCase();
 
 					let lecturer = document.querySelector('#lecturer').value;
-					// if (lecturer.length > 0) lecturer = ' (' + lecturer + ')';
 					const heading = document.querySelector('#heading').value;
 					const body = document.querySelector('#body').textContent;
 					const style = document.querySelector('#style');
 					const color = document.querySelector('#color').value;
-					// const backgroundColor =
-					// 	document.querySelector('#background-color').value;
 					out.innerHTML = `<span><strong>Tid:</strong></span><br><span>${timeStart}-${timeEnd}</span>`;
 					out.innerHTML += '<br><br>';
 					out.innerHTML += `<span><strong>Titel:</strong></span>`;
@@ -124,7 +117,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					out.innerHTML += `<span><strong>Plats:</strong></span>`;
 					out.innerHTML += '<br>';
 					out.innerHTML += `<span>${location}</span>`;
-					style.innerHTML = `span { color: ${color}; background-color: ${backgroundColor};`;
+					style.innerHTML = `span { color: ${color};`;
 				});
 				let event = new Event('input', {
 					bubbles: true,
