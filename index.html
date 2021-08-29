@@ -111,8 +111,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 
 					const isOnline = $location.options[$location.selectedIndex].hasAttribute('data-online') ? true : false;
 
-					console.log(out.loc);
-
 					if (out.lec.length > 0) out.lec = ` med ${out.lec}`;
 
 					out.heading = document.querySelector('#heading').value;
@@ -121,6 +119,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 
 					$out.innerHTML = `<span>${out.ts}-${out.te}</span>`;
 					$out.innerHTML += ` ${separator} `;
+
 					if (isOnline) {
 						$out.innerHTML += `<a href="${meet}${out.loc}"><span><b>ONLINE ${out.loc.toUpperCase()}</b></span></a>`;
 					} else {
@@ -132,10 +131,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 
 					$style.innerHTML = `span { color: ${out.color};`;
 				});
+
 				let event = new Event('input', {
 					bubbles: true,
 					cancelable: true,
 				});
+
 				$el.dispatchEvent(event);
 			}
 		</script>
