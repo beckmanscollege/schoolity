@@ -104,6 +104,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 						].textContent.toUpperCase();
 
 					let lecturer = document.querySelector('#lecturer').value;
+					if (lecturer.length > 0) lecturer = ' med ' + lecturer;
 					const heading = document.querySelector('#heading').value;
 					const input = document.querySelector('#input').value;
 					const style = document.querySelector('#style');
@@ -112,7 +113,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					out.innerHTML += '<br><br>';
 					out.innerHTML += `<span><strong>Titel:</strong></span>`;
 					out.innerHTML += '<br>';
-					out.innerHTML += `<span>${heading} med ${lecturer}</span><br><br><span>${input}</span>`;
+					out.innerHTML += `<span>${heading}${lecturer}</span><br><br><span>${input}</span>`;
 					out.innerHTML += '<br><br>';
 					out.innerHTML += `<span><strong>Plats:</strong></span>`;
 					out.innerHTML += '<br>';
