@@ -89,6 +89,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 		<script>
 			const els = document.querySelectorAll('input, select, textarea');
 			const out = document.querySelector('#output');
+			const separator = '|';
 			for (let el of els) {
 				el.addEventListener('input', function () {
 					const timeStart = document
@@ -97,27 +98,25 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					const timeEnd = document
 						.querySelector('#time-end')
 						.value.replaceAll(':', '.');
-					const location = document
+					let location = document
 						.querySelector('#location')
 						.options[
 							document.querySelector('#location').selectedIndex
 						].textContent.toUpperCase();
-
+					if (location.length > 0) location = ' · ' + location;
 					let lecturer = document.querySelector('#lecturer').value;
 					if (lecturer.length > 0) lecturer = ' med ' + lecturer;
-					const heading = document.querySelector('#heading').value;
+					let heading = document.querySelector('#heading').value;
+					if (heading.length > 0) heading = ' · ' + heading;
 					const input = document.querySelector('#input').value;
 					const style = document.querySelector('#style');
 					const color = document.querySelector('#color').value;
-					out.innerHTML = `<span><strong>Tid</strong></span><br><span>${timeStart}-${timeEnd}</span>`;
-					out.innerHTML += '<br><br>';
-					out.innerHTML += `<span><strong>Titel</strong></span>`;
-					out.innerHTML += '<br>';
+					out.innerHTML = `<span>${timeStart}-${timeEnd}</span>`;
+					out.innerHTML += `<span><strong>${location}</strong></span>`;
+					// out.innerHTML += '<br><br>';
+					// out.innerHTML += `<span><strong>Titel</strong></span>`;
+					// out.innerHTML += '<br>';
 					out.innerHTML += `<span>${heading}${lecturer}</span><br><br><span>${input}</span>`;
-					out.innerHTML += '<br><br>';
-					out.innerHTML += `<span><strong>Plats</strong></span>`;
-					out.innerHTML += '<br>';
-					out.innerHTML += `<span>${location}</span>`;
 					style.innerHTML = `span { color: ${color};`;
 				});
 				let event = new Event('input', {
