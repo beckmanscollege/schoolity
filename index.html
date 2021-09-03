@@ -121,7 +121,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					$out.innerHTML += ` ${separator} `;
 
 					if (isOnline) {
-						$out.innerHTML += `<a href="${meet}${out.loc}"><span><b>ONLINE ${out.loc.toUpperCase()}</b></span></a>`;
+						$out.innerHTML += `<a href="${meet}${out.loc}"><span><b>${meet}${out.loc}</b></span></a>`;
 					} else {
 						$out.innerHTML += `<span><b>${out.loc.toUpperCase()}</b></span>`;
 					}
