@@ -56,6 +56,7 @@
 						<option>Göta</option>
 						<option>Anders & Göta</option>
 						<option>Café</option>
+						<option>VK Lärarrum</option>
 						<option data-online="true">vk22</option>
 						<option data-online="true">vk23</option>
 						<option data-online="true">vk24</option>
@@ -92,54 +93,54 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 			</div>
 		</fieldset>
 		<script>
-			const $els = document.querySelectorAll('input, select, textarea');
-			const $out = document.querySelector('#output');
-			const meet = 'https://beckmanscollege.github.io/meet/';
-			const separator = '|';
+			const $els = document.querySelectorAll('input, select, textarea')
+			const $out = document.querySelector('#output')
+			const meet = 'https://beckmanscollege.github.io/meet/'
+			const separator = '|'
 			for (let $el of $els) {
 				$el.addEventListener('input', function () {
-					const out = {};
+					const out = {}
 
-					const $timeStart = document.querySelector('#time-start');
-					const $timeEnd = document.querySelector('#time-end');
-					const $location = document.querySelector('#location');
-					const $lecturer = document.querySelector('#lecturer');
-					const $style = document.querySelector('#style');
+					const $timeStart = document.querySelector('#time-start')
+					const $timeEnd = document.querySelector('#time-end')
+					const $location = document.querySelector('#location')
+					const $lecturer = document.querySelector('#lecturer')
+					const $style = document.querySelector('#style')
 
-					out.ts = $timeStart.value.replaceAll(':', '.');
-					out.te = $timeEnd.value.replaceAll(':', '.');
-					out.loc = $location.options[$location.selectedIndex].textContent;
-					out.lec = $lecturer.value;
+					out.ts = $timeStart.value.replaceAll(':', '.')
+					out.te = $timeEnd.value.replaceAll(':', '.')
+					out.loc = $location.options[$location.selectedIndex].textContent
+					out.lec = $lecturer.value
 
-					const isOnline = $location.options[$location.selectedIndex].hasAttribute('data-online') ? true : false;
+					const isOnline = $location.options[$location.selectedIndex].hasAttribute('data-online') ? true : false
 
-					if (out.lec.length > 0) out.lec = ` med ${out.lec}`;
+					if (out.lec.length > 0) out.lec = ` med ${out.lec}`
 
-					out.heading = document.querySelector('#heading').value;
-					out.input = document.querySelector('#input').value;
-					out.color = document.querySelector('#color').value;
+					out.heading = document.querySelector('#heading').value
+					out.input = document.querySelector('#input').value
+					out.color = document.querySelector('#color').value
 
-					$out.innerHTML = `<span>${out.ts}-${out.te}</span>`;
-					$out.innerHTML += ` ${separator} `;
+					$out.innerHTML = `<span>${out.ts}-${out.te}</span>`
+					$out.innerHTML += ` ${separator} `
 
 					if (isOnline) {
-						$out.innerHTML += `<a href="${meet}${out.loc}"><span><b>${meet}${out.loc}</b></span></a>`;
+						$out.innerHTML += `<a href="${meet}${out.loc}"><span><b>${meet}${out.loc}</b></span></a>`
 					} else {
-						$out.innerHTML += `<span><b>${out.loc.toUpperCase()}</b></span>`;
+						$out.innerHTML += `<span><b>${out.loc.toUpperCase()}</b></span>`
 					}
 
-					$out.innerHTML += '<br>';
-					$out.innerHTML += `<span>${out.heading}${out.lec}</span><br><br><span><em>${out.input}</em></span>`;
+					$out.innerHTML += '<br>'
+					$out.innerHTML += `<span>${out.heading}${out.lec}</span><br><br><span><em>${out.input}</em></span>`
 
-					$style.innerHTML = `span { color: ${out.color};`;
-				});
+					$style.innerHTML = `:root { --color: ${out.color}; }`
+				})
 
 				let event = new Event('input', {
 					bubbles: true,
 					cancelable: true,
-				});
+				})
 
-				$el.dispatchEvent(event);
+				$el.dispatchEvent(event)
 			}
 		</script>
 	</body>
