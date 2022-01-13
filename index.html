@@ -17,11 +17,12 @@
 			}
 			label {
 				display: inline-block;
-				width: 30%;
+				width: 20%;
 			}
 			label + *,
 			textarea {
-				width: 100%;
+				width: 70%;
+				text-align: left;
 			}
 		</style>
 	</head>
@@ -76,6 +77,10 @@
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim diam, nec vulputate diam elementum id. Pellentesque rutrum id augue sed commodo. Curabitur luctus gravida dui, in finibus tortor semper vulputate. Aliquam mi nibh, sagittis vitae luctus et, suscipit non neque. Nulla vitae lorem elit. Curabitur suscipit ultrices mi, a pharetra purus vulputate a. Donec sed ligula a lectus consequat blandit. Maecenas imperdiet lacus ac sem malesuada, eu imperdiet ex vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus quis cursus odio.</textarea
 					>
 				</p>
+				<p>
+					<label for="obligatory">Obligatorisk (betygsgrundande)</label>
+					<input id="obligatory" type="checkbox" />
+				</p>
 			</div>
 			<div>
 				<h3>Stil</h3>
@@ -105,6 +110,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					const $timeEnd = document.querySelector('#time-end')
 					const $location = document.querySelector('#location')
 					const $lecturer = document.querySelector('#lecturer')
+					const $obligatory = document.querySelector('#obligatory')
 					const $style = document.querySelector('#style')
 
 					out.ts = $timeStart.value.replaceAll(':', '.')
@@ -113,6 +119,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					out.lec = $lecturer.value
 
 					const isOnline = $location.options[$location.selectedIndex].hasAttribute('data-online') ? true : false
+					const isObligatory = $obligatory.checked
 
 					if (out.lec.length > 0) out.lec = ` med ${out.lec}`
 
@@ -131,6 +138,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 
 					$out.innerHTML += '<br>'
 					$out.innerHTML += `<span>${out.heading}${out.lec}</span><br><br><span><em>${out.input}</em></span>`
+					if (isObligatory) {
+						$out.innerHTML += `<br><br><span><b>Obligatorisk</b></span>`
+					}
 
 					$style.innerHTML = `:root { --color: ${out.color}; }`
 				})
