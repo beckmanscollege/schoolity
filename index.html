@@ -141,7 +141,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					out.color = document.querySelector('#color').value
 
 					$out.innerHTML = `<span>${out.ts}-${out.te}</span>`
-					$out.innerHTML += ` ${separator} `
+					if (out.loc.length > 0) $out.innerHTML += ` ${separator} `
 
 					$out.innerHTML += `<span><b>${out.loc.toUpperCase()}</b></span>`
 					$out.innerHTML += '<br>'
