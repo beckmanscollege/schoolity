@@ -47,7 +47,7 @@
 				<h3>Info</h3>
 				<p>
 					<label for="location">Plats</label>
-					<select id="location">
+					<select id="location" onchange="this.nextElementSibling.value=this.value">
 						<option></option>
 						<option>Aula</option>
 						<option>Corita</option>
@@ -63,7 +63,7 @@
 				</p>
 				<p>
 					<label for="category">Typ</label>
-					<select id="category">
+					<select id="category" onchange="this.nextElementSibling.value=this.value">
 						<option></option>
 						<option>Workshop</option>
 						<option>Föreläsning</option>
@@ -71,6 +71,7 @@
 						<option>Avstämning</option>
 						<option>Presentation</option>
 					</select>
+					<input type="text" name="format" value=""/>
 				</p>
 				<p>
 					<label for="lecturer">Huvudperson</label>
