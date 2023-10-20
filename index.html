@@ -118,7 +118,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					const $timeStart = document.querySelector('#time-start')
 					const $timeEnd = document.querySelector('#time-end')
 					const $location = document.querySelector('#location')
-					const $category = document.querySelector('#$category')
+					const $category = document.querySelector('#category')
 					const $lecturer = document.querySelector('#lecturer')
 					const $obligatory = document.querySelector('#obligatory')
 					const $style = document.querySelector('#style')
@@ -132,6 +132,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					const isOnline = $location.options[$location.selectedIndex].hasAttribute('data-online') ? true : false
 					const isObligatory = $obligatory.checked
 
+					if (out.cat.length > 0) out.cat += ': '
 					if (out.lec.length > 0) out.lec = ` med ${out.lec}`
 
 					out.heading = document.querySelector('#heading').value
@@ -142,11 +143,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					$out.innerHTML += ` ${separator} `
 
 					$out.innerHTML += `<span><b>${out.loc.toUpperCase()}</b></span>`
-			
-
 					$out.innerHTML += '<br>'
 		
-					$out.innerHTML += `<span>${out.heading}${out.lec}</span><br><br><span><em>${out.input}</em></span>`
+					$out.innerHTML += `<span>${out.cat}${out.heading}${out.lec}</span><br><br><span><em>${out.input}</em></span>`
 					if (isObligatory) {
 						$out.innerHTML += `<br><br><span><b>OBLIGATORISK (frånvaro noteras)</b></span>`
 					}
