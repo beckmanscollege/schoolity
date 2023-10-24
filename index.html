@@ -2,11 +2,13 @@
 	<head>
 		<style>
 			body {
-				font-family: arial, sans-serif;
-				font-size: 13px;
+				font-family: monospace, sans-serif;
+				font-size: 12px;
+				color: var(--color);
 			}
 			fieldset {
 				width: 49%;
+				display: inline-block;
 				box-sizing: border-box;
 			}
 			fieldset:first-of-type {
@@ -23,6 +25,9 @@
 			textarea {
 				width: 100%;
 			}
+			#output {
+				white-space: break-spaces;
+			}
 		</style>
 	</head>
 	<body>
@@ -35,11 +40,11 @@
 				<div>
 					<p>
 						<label for="time-start">Start</label>
-						<input type="time" id="time-start" value="09:00" />
+						<input type="time" id="time-start" value="09:00" step="900" />
 					</p>
 					<p>
 						<label for="time-end">Slut</label>
-						<input type="time" id="time-end" value="10:00" />
+						<input type="time" id="time-end" value="10:00" step="900" />
 					</p>
 				</div>
 			</div>
@@ -47,7 +52,7 @@
 				<h3>Info</h3>
 				<p>
 					<label for="location">Plats</label>
-					<select id="location" onchange="this.nextElementSibling.value=this.value">
+					<select id="location">
 						<option></option>
 						<option>Aula</option>
 						<option>Corita</option>
@@ -63,23 +68,24 @@
 				</p>
 				<p>
 					<label for="category">Typ</label>
-					<select id="category" onchange="this.nextElementSibling.value=this.value">
+					<select id="category">
 						<option></option>
 						<option>Workshop</option>
 						<option>Föreläsning</option>
 						<option>Handledning</option>
 						<option>Avstämning</option>
+						<option>Exkursion</option>
 						<option>Presentation</option>
+						<option>Eget arbete på skolan</option>
 					</select>
-					<input type="text" name="format" value=""/>
 				</p>
 				<p>
-					<label for="lecturer">Huvudperson</label>
-					<input id="lecturer" value="Jonas Johansson" />
+					<label for="lecturer">Kontaktperson</label>
+					<input id="lecturer" value="" />
 				</p>
 				<p>
 					<label for="heading">Rubrik</label>
-					<input id="heading" value="The Art of the Deal" />
+					<input id="heading" value="" />
 				</p>
 				<p>
 					<label for="input">Innehåll</label>
@@ -88,7 +94,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					>
 				</p>
 				<p>
-					<label for="obligatory">Obligatorisk (betygsgrundande)</label>
+					<label for="obligatory">Obligatorisk</label>
 					<input id="obligatory" type="checkbox" />
 				</p>
 			</div>
@@ -111,7 +117,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 			const $els = document.querySelectorAll('input, select, textarea')
 			const $out = document.querySelector('#output')
 			const meet = 'https://beckmanscollege.github.io/meet/'
-			const separator = '|'
+			const separator = '/'
 			for (let $el of $els) {
 				$el.addEventListener('input', function () {
 					const out = {}
@@ -133,22 +139,25 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					const isOnline = $location.options[$location.selectedIndex].hasAttribute('data-online') ? true : false
 					const isObligatory = $obligatory.checked
 
-					if (out.cat.length > 0) out.cat += ': '
-					if (out.lec.length > 0) out.lec = ` med ${out.lec}`
-
 					out.heading = document.querySelector('#heading').value
 					out.input = document.querySelector('#input').value
 					out.color = document.querySelector('#color').value
 
+					if (out.cat.length > 0) {
+						out.cat = out.heading.length > 0 || out.lec.value > 0 ? out.cat + ': ' : (out.cat += ' ')
+					}
+					if (out.lec.length > 0) out.lec = ` med ${out.lec}`
+
 					$out.innerHTML = `<span>${out.ts}-${out.te}</span>`
 					if (out.loc.length > 0) $out.innerHTML += ` ${separator} `
 
-					$out.innerHTML += `<span><b>${out.loc.toUpperCase()}</b></span>`
-					$out.innerHTML += '<br>'
-		
-					$out.innerHTML += `<span>${out.cat}${out.heading}${out.lec}</span><br><br><span><em>${out.input}</em></span>`
+					$out.innerHTML += `<span>${out.loc.toUpperCase()}</span>`
+					$out.innerHTML += ' / '
+
+					$out.innerHTML += `<span>${out.cat}${out.heading}${out.lec}</span><br>`
+					if (out.input.length > 0) $out.innerHTML += `<br><span><em>${out.input}</em></span>`
 					if (isObligatory) {
-						$out.innerHTML += `<br><br><span><b>OBLIGATORISK (frånvaro noteras)</b></span>`
+						$out.innerHTML += `<br><br><span><b>OBLIGATORISK</b></span>`
 					}
 
 					$style.innerHTML = `:root { --color: ${out.color}; }`
