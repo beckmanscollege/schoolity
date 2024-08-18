@@ -71,6 +71,7 @@
 					<select id="category">
 						<option></option>
 						<option>Workshop</option>
+						<option>Uppgift</option>
 						<option>Föreläsning</option>
 						<option>Handledning</option>
 						<option>Avstämning</option>
@@ -146,7 +147,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod dignissim 
 					if (out.cat.length > 0) {
 						out.cat = out.heading.length > 0 || out.lec.value > 0 ? out.cat + ': ' : (out.cat += ' ')
 					}
-					if (out.lec.length > 0) out.lec = ` med ${out.lec}`
+					if (out.lec.length > 0) out.lec = `med ${out.lec}`
 
 					$out.innerHTML = `<span>${out.ts}-${out.te}</span>`
 					if (out.loc.length > 0) $out.innerHTML += ` ${separator} `
